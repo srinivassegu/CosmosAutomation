@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+  <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />  
+
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+
+
+	<contextName>EasyEmail</contextName>
+	<jmxConfigurator />
+
+  <property name="logback.dir" value="${log.dir}"/>
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date{yyyy-MMM-dd_HH:mm} %-5level [%thread] %logger: %msg%n</pattern>
+      <outputPatternAsHeader>true</outputPatternAsHeader>
+    </encoder>
+	</appender>
+
+
+  <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  
+      <file>${logback.dir}/easyemail.log</file>
+  
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <fileNamePattern>${logback.dir}/easyemail-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+         <maxHistory>30</maxHistory>
+         
+         <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>10MB</maxFileSize>
+         </timeBasedFileNamingAndTriggeringPolicy>         
+      
+      </rollingPolicy> 
+  
+      <encoder>
+        <pattern>%date{yyyy-MMM-dd_HH:mm} %-5level [%thread] %logger{36}: %msg%n</pattern>
+        <outputPatternAsHeader>true</outputPatternAsHeader>
+      </encoder>
+  
+  </appender>
+
+
+	<logger name="com.org" level="info" additivity="false">
+      <appender-ref ref="file"/> 
+	</logger>
+	
+	<logger name="com.org" level="info" additivity="false">
+      <appender-ref ref="file"/> 
+	</logger>
+
+	<logger name="org.springframework" level="info" additivity="false">
+      <appender-ref ref="file"/> 
+	</logger>
+
+	<root level="error">
+		<appender-ref ref="console" />
+		<appender-ref ref="error" />
+		<appender-ref ref="file" />
+	</root>
+	
+</configuration>
