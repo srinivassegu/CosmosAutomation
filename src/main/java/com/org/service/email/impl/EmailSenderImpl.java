@@ -55,7 +55,11 @@ public class EmailSenderImpl implements EmailSender {
             return;
         }
         for (TimeSheetBean timeSheetBean : timeSheetBeans) {
-            this.sendEmail(employeeBean, timeSheetBean);
+            try {
+                this.sendEmail(employeeBean, timeSheetBean);
+            } catch (Exception e) {
+                logger.error("Unable to send email for consultant emailid: {}", timeSheetBean.getConsultantEmailId());
+            }
         }
     }
 

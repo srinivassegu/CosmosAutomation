@@ -19,7 +19,7 @@
 	<body id="body">
 				<p>Hi ${consultantFirstName},</p>
 				<p>&nbsp;</p>
-				<p style="padding-left: 30px;">Please submite timesheets for the week period from ${startDate} to ${endDate} here,&nbsp;${submissionLink}.</p>
+				<p style="padding-left: 30px;">Please submit timesheets for the week period from ${startDate} to ${endDate} here,&nbsp;${submissionLink}.</p>
 				<p style="padding-left: 30px;">&nbsp;</p>
 				<p><em>Thanks and Regards,</em></p>
 				<p><em>${employeeName}</em></p>

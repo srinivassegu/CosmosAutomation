@@ -10,6 +10,7 @@ public class TimeSheetBean {
     private String consultantFirstName;
     private String consultantEmailId;
     private long consultantId;
+    private boolean isSendingFailed;
 
     public LocalDate getStartDate() {
         return startDate;
@@ -57,6 +58,14 @@ public class TimeSheetBean {
 
     public void setConsultantId(long consultantId) {
         this.consultantId = consultantId;
+    }
+
+    public boolean isSendingFailed() {
+        return isSendingFailed;
+    }
+
+    public void setSendingFailed(boolean isSendingFailed) {
+        this.isSendingFailed = isSendingFailed;
     }
 
 }

@@ -6,5 +6,5 @@ import com.org.model.TimeSheetBean;
 
 public interface ConsultantTimesheetDao {
 
-    public List<TimeSheetBean> getUnsubmittedList();
+    public List<TimeSheetBean> getUnsubmittedList(int vendorId);
 }

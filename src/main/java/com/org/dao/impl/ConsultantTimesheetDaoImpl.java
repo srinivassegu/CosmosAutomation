@@ -30,14 +30,15 @@ public class ConsultantTimesheetDaoImpl implements ConsultantTimesheetDao {
 
     @Override
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public List<TimeSheetBean> getUnsubmittedList() {
+    public List<TimeSheetBean> getUnsubmittedList(int vendorId) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT ct.first_name, ct.email_id, timesheet.week_ending, ct.id ");
         sb.append("FROM automation.consultant_timesheet_tbl timesheet ");
         sb.append("INNER JOIN automation.consultant_tbl ct on ct.id= timesheet.consultant_id ");
-        sb.append("WHERE timesheet.is_submitted=?");
+        sb.append("INNER JOIN automation.vendor_consultant_xref_tbl xref on ct.id= xref.consultant_id ");
+        sb.append("WHERE timesheet.is_submitted=? and xref.vendor_id=? and xref.is_active=1");
         try {
-            return this.getJdbcTemplate().query(sb.toString(), new Object[] { 0 }, (resultSet, rowNum) -> {
+            return this.getJdbcTemplate().query(sb.toString(), new Object[] { 0, vendorId }, (resultSet, rowNum) -> {
                 TimeSheetBean bean = new TimeSheetBean();
                 bean.setConsultantFirstName(resultSet.getString("first_name"));
                 bean.setConsultantEmailId(resultSet.getString("email_id"));

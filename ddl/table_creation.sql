@@ -20,6 +20,18 @@ CREATE TABLE `consultant_timesheet_tbl` (
   CONSTRAINT `consultant_week_tbl_ibfk_1` FOREIGN KEY (`consultant_id`) REFERENCES `consultant_tbl` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB COLLATE=utf8mb4_general_ci  DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `vendor_schedule_tbl` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `vendor_id` int(11) NOT NULL,
+  `next_notification_time` DATETIME NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `vendor_id` (`vendor_id`),
+  CONSTRAINT `vendor_schedule_tbl_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_tbl` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 CREATE TABLE `department_tbl` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `department_name` varchar(45) NOT NULL,
